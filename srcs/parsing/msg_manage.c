@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:24:58 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 18:54:41 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/20 14:49:14 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	error_file(void)
 	exit(ERROR);
 }
 
-void	invalid_map(data_map *map, int n)
+void	invalid_map(t_map *map, int n)
 {
 	if (n == 0)
 		print_error("Invalid map : map is not a rectangle\n");
@@ -38,6 +38,8 @@ void	invalid_map(data_map *map, int n)
 		print_error("Invalid map : the map have 2 exit or start player\n");
 	else if (n == 3)
 		print_error("Invalid map : other caractere find than :-P-E-C-1-0-\n");
+	else if (n == 4)
+		print_error("Invalid map : collectible or exit can't be access\n");
 	free_map(map);
 	exit(ERROR);
 }

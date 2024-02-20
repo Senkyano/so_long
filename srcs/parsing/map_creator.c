@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:11:47 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 17:28:49 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/20 14:45:47 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	*keep_to(char *str, char c);
 
-void	map_creator(data_map *map, char *file_map)
+void	map_creator(t_map *map, char *file_map)
 {
 	size_t	i;
 	char	*str;
@@ -63,10 +63,11 @@ char	*keep_to(char *str, char c)
 	return (new_str);
 }
 
-void	free_map(data_map *map)
+void	free_map(t_map *map)
 {
 	if (map->fd != -1)
 		close(map->fd);
 	free_split(map->env);
+	free_split(map->cp_map);
 	exit(ERROR);
 }

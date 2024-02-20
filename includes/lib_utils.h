@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:20:28 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 13:12:07 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:05:26 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*strall_join(char *str1, char *str2);
 // DUP
 char	*lib_strdup(char *str);
 char	*lib_strup(char *str);
+//		SENT
+char	**copy_sent(char **sent);
 char	**sentup(char *str);
 char	**sentup_n(char **sent, char *str, size_t n);
 // SPLIT
@@ -53,6 +55,6 @@ char	**lib_split(char *str, char *set);
 // FREE
 void	free_split(char **sent);
 // SRCH
-int	lib_srch(char *str, char to_find);
+int		lib_srch(char *str, char to_find);
 
 #endif

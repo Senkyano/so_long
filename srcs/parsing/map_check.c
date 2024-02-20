@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:17:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 18:51:04 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/20 14:47:24 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,18 @@
 
 static bool	same_length(char **sent);
 static bool	wall_around(char **sent);
-static void	inside_wall(data_map *map);
+static void	inside_wall(t_map *map, t_player *player);
 
-void	map_valid(data_map *map)
+void	map_valid(t_map *map, t_player *player)
 {
 	if (!same_length(map->env))
 		invalid_map(map, 0);
 	if (!wall_around(map->env))
 		invalid_map(map, 1);
-	inside_wall(map);
+	inside_wall(map, player);
+	map->cp_map = copy_sent(map->env);
+	if (flood_field(map, player->pos_x, player->pos_y) == false)
+		invalid_map(map, 4);
 }
 
 static bool	in_data_map(char c)
@@ -40,7 +43,7 @@ static bool	in_data_map(char c)
 	return (false);
 }
 
-static void	inside_wall(data_map *map)
+static void	inside_wall(t_map *map, t_player *player)
 {
 	size_t	x;
 	size_t	y;
@@ -54,7 +57,7 @@ static void	inside_wall(data_map *map)
 			if (map->env[y][x] == 'E' && map->exit == false)
 				map->exit = true;
 			else if (map->env[y][x] == 'P' && map->start == false)
-				map->start = true;
+				init_poslayer(map, player, x, y);
 			else if (map->env[y][x] == 'E' || map->env[y][x] == 'P')
 				invalid_map(map, 2);
 			if (map->env[y][x] == 'C')
@@ -86,7 +89,7 @@ static bool	wall_around(char **sent)
 	x--;
 	while (sent[y])
 	{
-		if (sent[y][0] != '1'|| sent[y][x] != '1')
+		if (sent[y][0] != '1' || sent[y][x] != '1')
 			return (false);
 		y++;
 	}

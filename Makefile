@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/16 17:18:03 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/20 16:24:11 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,9 @@ FILE_LIB_C =	$(SRCS)/$(LIB)/lib_char.c \
 			
 FILE_PARS_C =	$(SRCS)/$(PARS)/map_creator.c \
 				$(SRCS)/$(PARS)/msg_manage.c \
-				$(SRCS)/$(PARS)/map_check.c
+				$(SRCS)/$(PARS)/map_check.c \
+				$(SRCS)/$(PARS)/player.c \
+				$(SRCS)/$(PARS)/flood_field.c
 
 # FILE_EXEC_C =	
 # Fichier .o
@@ -80,6 +82,7 @@ all : $(NAME)
 	@echo "$(VERT)FINISH $(NAME)$(RESET)"
 
 $(NAME) : $(LIB_O) $(PARS_O) $(EXEC_O)
+	make -C $(SRCS)/minilibx-linux
 	@$(CC) $(FLAGS) -o $(NAME) $(LIB_O) $(PARS_O) $(SRCS)/main.c
 
 $(OBJS)/%.o : $(SRCS)/$(LIB)/%.c

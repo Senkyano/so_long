@@ -6,13 +6,13 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:48:44 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 15:42:10 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:06:09 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/get_next_line.h"
 #include "../../includes/lib_utils.h"
-# include <fcntl.h>
+#include <fcntl.h>
 
 static char	*ft_aftline(char *curr);
 static char	*ft_line(char *curr);

@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:56:55 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/16 13:22:43 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/19 14:03:01 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	slib_cmp(char *str, char *str2)
 {
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	j = 0;
 	if (str_len(str) > str_len(str2))
