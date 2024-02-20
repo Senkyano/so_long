@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:12:03 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/20 16:02:15 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/20 17:54:37 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 
 typedef struct s_image
 {
-	int	x;
+	void	*ground;
+	void	*wall;
+	void	*perso;
+	void	*coin;
 }	t_image;
 
 typedef struct s_player
@@ -45,6 +48,8 @@ typedef struct s_map
 
 typedef struct s_game
 {
+	void	*mlx;
+	void	*window;
 	
 }	t_game;
 

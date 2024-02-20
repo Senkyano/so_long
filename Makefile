@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/20 16:24:11 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/20 17:37:07 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,19 +76,33 @@ FILE_PARS_C =	$(SRCS)/$(PARS)/map_creator.c \
 LIB_O = $(FILE_LIB_C:$(SRCS)/$(LIB)/%.c=$(OBJS)/%.o)
 PARS_O = $(FILE_PARS_C:$(SRCS)/$(PARS)/%.c=$(OBJS)/%.o)
 # EXEC_O = $(FILE_EXEC_C:$(SRCS)/$(EXEC)/%.c=$(OBJS)/%.o)
+
+#########################################################################
+#							MINI-libx									#
+#########################################################################
+MLX_DIR		= minilibx-linux
+
+MLX			= $(addprefix $(MLX_DIR)/, libmlx_Linux.a)
+
+MLX_LIB		= mlx_Linux
+
+MLX_LIBS	= -lXext -lX11
+
 # **************************************************************************** #
 # Compilation / creation des dir neccessaire
 all : $(NAME)
 	@echo "$(VERT)FINISH $(NAME)$(RESET)"
 
-$(NAME) : $(LIB_O) $(PARS_O) $(EXEC_O)
-	make -C $(SRCS)/minilibx-linux
-	@$(CC) $(FLAGS) -o $(NAME) $(LIB_O) $(PARS_O) $(SRCS)/main.c
+$(NAME) : $(LIB_O) $(PARS_O) $(MLX)
+	@$(CC) $(FLAGS) -o $(NAME) $(LIB_O) $(PARS_O) $(SRCS)/main.c -L $(MLX_DIR)
 
 $(OBJS)/%.o : $(SRCS)/$(LIB)/%.c
 	@mkdir -p $(OBJS)
 	@$(CC) $(FLAGS) -c $< -o $@
 	@echo "$(JAUNE)loading : $<"
+
+$(MLX) :
+	@make -C $(MLX_DIR) --silent
 
 $(OBJS)/%.o : $(SRCS)/$(PARS)/%.c
 	@echo "$(JAUNE)loading : $<"
@@ -102,6 +116,7 @@ $(OBJS)/%.o : $(SRCS)/$(PARS)/%.c
 
 clean :
 	@$(RM) $(OBJS)
+	make clean -C $(MLX_DIR) --silent
 	@echo "$(ROUGE)FILES DELETED$(RESET)"
 
 fclean : clean
