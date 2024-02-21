@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/21 17:22:51 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/21 19:50:18 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ $(NAME) : $(LIB_O) $(PARS_O) $(MLX) $(WIN_O)
 
 $(OBJS)/%.o : $(SRCS)/$(LIB)/%.c
 	@mkdir -p $(OBJS)
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -I includes -c $< -o $@
 	@echo "$(JAUNE)loading : $<"
 
 $(MLX) :
