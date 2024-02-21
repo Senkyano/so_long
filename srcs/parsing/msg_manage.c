@@ -6,12 +6,16 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:24:58 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/20 14:49:14 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:29:12 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lib_so_long.h"
 #include <stdlib.h>
+#include <X11/X.h>
+#include <X11/keysym.h>
+#include "../../minilibx-linux/mlx.h"
+#include <stdio.h>
 
 void	how_use(int n)
 {
@@ -41,5 +45,19 @@ void	invalid_map(t_map *map, int n)
 	else if (n == 4)
 		print_error("Invalid map : collectible or exit can't be access\n");
 	free_map(map);
+	exit(ERROR);
+}
+
+void	fail_display(t_game *game)
+{
+	if (game->texture.player != NULL)
+		mlx_destroy_image(game->mlx, game->texture.player);
+	// mlx_destroy_image(game->mlx, game->texture.ground);
+	// mlx_destroy_image(game->mlx, game->texture.wall);
+	// mlx_destroy_image(game->mlx, game->texture.coin);
+	mlx_destroy_window(game->mlx, game->window);
+	mlx_destroy_display(game->mlx);
+	free_map(&game->map);
+	print_error("<Invalid image>\n");
 	exit(ERROR);
 }

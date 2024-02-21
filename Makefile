@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/20 17:37:07 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/21 17:22:51 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ LIB = utils
 OBJS = objs
 PARS = parsing
 EXEC = exec
+WIN = window
 
 # Fichier .c
 FILE_LIB_C =	$(SRCS)/$(LIB)/lib_char.c \
@@ -71,18 +72,20 @@ FILE_PARS_C =	$(SRCS)/$(PARS)/map_creator.c \
 				$(SRCS)/$(PARS)/player.c \
 				$(SRCS)/$(PARS)/flood_field.c
 
+FILE_WIN_C =	$(SRCS)/$(WIN)/display.c
+
 # FILE_EXEC_C =	
 # Fichier .o
 LIB_O = $(FILE_LIB_C:$(SRCS)/$(LIB)/%.c=$(OBJS)/%.o)
 PARS_O = $(FILE_PARS_C:$(SRCS)/$(PARS)/%.c=$(OBJS)/%.o)
-# EXEC_O = $(FILE_EXEC_C:$(SRCS)/$(EXEC)/%.c=$(OBJS)/%.o)
+WIN_O = $(FILE_WIN_C:$(SRCS)/$(WIN)/%.c=$(OBJS)/%.o)
 
 #########################################################################
 #							MINI-libx									#
 #########################################################################
 MLX_DIR		= minilibx-linux
 
-MLX			= $(addprefix $(MLX_DIR)/, libmlx_Linux.a)
+MLX			= $(MLX_DIR)/libmlx_Linux.a
 
 MLX_LIB		= mlx_Linux
 
@@ -93,8 +96,13 @@ MLX_LIBS	= -lXext -lX11
 all : $(NAME)
 	@echo "$(VERT)FINISH $(NAME)$(RESET)"
 
-$(NAME) : $(LIB_O) $(PARS_O) $(MLX)
-	@$(CC) $(FLAGS) -o $(NAME) $(LIB_O) $(PARS_O) $(SRCS)/main.c -L $(MLX_DIR)
+# $(NAME) : $(LIB_O) $(PARS_O) $(MLX)
+# 	@$(CC) $(FLAGS) $(MLX_LIBS) -o $(NAME) $(LIB_O) $(PARS_O) \
+# 	-L $(MLX_DIR)/libmlx_Linux.a $(SRCS)/main.c
+
+
+$(NAME) : $(LIB_O) $(PARS_O) $(MLX) $(WIN_O)
+	@$(CC) $(FLAGS) $(LIB_O) $(PARS_O) $(WIN_O) $(MLX) $(MLX_LIBS) -o $(NAME) $(SRCS)/main.c
 
 $(OBJS)/%.o : $(SRCS)/$(LIB)/%.c
 	@mkdir -p $(OBJS)
@@ -106,11 +114,11 @@ $(MLX) :
 
 $(OBJS)/%.o : $(SRCS)/$(PARS)/%.c
 	@echo "$(JAUNE)loading : $<"
-	@$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -I includes -c $< -o $@
 
-# $(OBJS)/%.o : $(SRCS)/$(EXEC)/%.c
-# 	@echo "$(JAUNE)loading : $<"
-# 	@$(CC) $(FLAGS) -c $< -o $@
+$(OBJS)/%.o : $(SRCS)/$(WIN)/%.c
+	@echo "$(JAUNE)loading : $<"
+	@$(CC) $(FLAGS) -I includes -c $< -o $@
 # **************************************************************************** #
 # Regle / COMMAND
 
