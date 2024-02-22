@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:08 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/22 14:47:38 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/22 19:31:02 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, const char **argv)
 	init_map_player(&game);
 	map_creator(&game.map, (char *)argv[1]);
 	map_valid(&game.map, &game.player);
+	init_display(&game);
+	clear_game(&game);
 	free_map(&game.map);
 	return (0);
 }
