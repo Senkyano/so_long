@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:12:03 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/21 15:56:10 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/22 14:13:52 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	error_file(void);
 void	free_map(t_map *map);
 void	invalid_map(t_map *map, int n);
 void	fail_display(t_game *game);
+void	clear_game(t_game *game);
 // creation
 void	map_creator(t_map *map, char *file_map);
 void	map_valid(t_map *map, t_player *player);
