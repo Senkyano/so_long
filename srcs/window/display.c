@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:35:15 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/22 19:55:37 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/25 03:24:31 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,25 @@
 #include <unistd.h>
 
 void	init_texture(t_game *game);
+int	handle_key(int keycode, t_game *game);
 
 void	init_display(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->window = mlx_new_window(game->mlx, 1920, 1080, "Plebis");
+	game->window = mlx_new_window(game->mlx, game->map.width * 50, \
+	game->map.high * 50, "Plebis");
 	init_texture(game);
+	aff_win(game);
+	mlx_hook(game->window, KeyRelease, KeyReleaseMask, handle_key, game);
+	mlx_loop(game->mlx);
+}
+
+int	handle_key(int keycode, t_game *game)
+{
+	if (keycode == 65307)
+		clear_game(game);
+	free_map(&game->map);
+	return (0);
 }
 
 void	init_texture(t_game *game)
@@ -34,7 +47,7 @@ void	init_texture(t_game *game)
 	game->texture.ground = mlx_xpm_file_to_image(game->mlx, \
 	"srcs/texture/grass.xpm", &i, &i);
 	game->texture.wall = mlx_xpm_file_to_image(game->mlx, \
-	"srcs/texture/tree(1).xpm", &i, &i);
+	"srcs/texture/arbre.xpm", &i, &i);
 	game->texture.coin = mlx_xpm_file_to_image(game->mlx, \
 	"srcs/texture/circuit-coin.xpm", &i, &i);
 	if (game->texture.player == NULL || game->texture.ground == NULL || \

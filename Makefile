@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/21 19:50:18 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/25 01:47:35 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,8 @@ FILE_PARS_C =	$(SRCS)/$(PARS)/map_creator.c \
 				$(SRCS)/$(PARS)/player.c \
 				$(SRCS)/$(PARS)/flood_field.c
 
-FILE_WIN_C =	$(SRCS)/$(WIN)/display.c
+FILE_WIN_C =	$(SRCS)/$(WIN)/display.c \
+				$(SRCS)/$(WIN)/affichage.c
 
 # FILE_EXEC_C =	
 # Fichier .o

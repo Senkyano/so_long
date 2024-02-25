@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:12:03 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/22 19:50:05 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/25 03:23:45 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_map
 	int		fd;
 	char	**env;
 	char	**cp_map;
+	int		high;
+	int		width;
 	bool	start;
 	bool	exit;
 	bool	coin;
@@ -71,5 +73,6 @@ void	map_valid(t_map *map, t_player *player);
 void	init_poslayer(t_map *map, t_player *player, size_t x, size_t y);
 bool	flood_field(t_map *map, size_t x, size_t y);
 void	init_display(t_game *game);
+void	aff_win(t_game *game);
 
 #endif

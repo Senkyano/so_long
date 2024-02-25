@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:17:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/20 14:47:24 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/25 02:07:38 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	inside_wall(t_map *map, t_player *player)
 				invalid_map(map, 3);
 		}
 	}
+	map->high = y;
+	map->width = x;
 }
 
 static bool	wall_around(char **sent)
