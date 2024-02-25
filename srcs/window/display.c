@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:35:15 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/25 03:24:31 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/25 03:39:28 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	init_display(t_game *game)
 int	handle_key(int keycode, t_game *game)
 {
 	if (keycode == 65307)
+	{
 		clear_game(game);
-	free_map(&game->map);
+		free_map(&game->map);
+	}
 	return (0);
 }
 
