@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:48:06 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/26 18:51:35 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 21:27:00 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ static void	counteur_map(t_map *map, char c);
 
 bool	flood_field(t_map *map, size_t x, size_t y)
 {
-	int	i;
-
-	i = 0;
-	while (map->cp_map[i])
-	{
-		printf("%s\n", map->cp_map[i++]);
-	}
-	printf("\n");
 	counteur_map(map, map->cp_map[y][x]);
 	map->cp_map[y][x] = '*';
 	if (map->cp_map[y][x - 1] != '*' && map->cp_map[y][x - 1] != '1')

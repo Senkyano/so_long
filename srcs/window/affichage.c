@@ -6,12 +6,16 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 01:35:24 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/26 18:02:08 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 21:36:59 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_so_long.h"
+#include <unistd.h>
 #include <stdio.h>
+
+void	print_num(int i);
+void	ft_putchar(char c);
 
 void	aff_win(t_game *game)
 {
@@ -46,7 +50,6 @@ void	check_player(t_game *game, int x, int y)
 {
 	if (game->map.env[y][x] == '1')
 	{
-		printf("%d = x, %d = y\n", x, y);
 		print_error("I can't move here,please choose an other direction\n");
 		return ;
 	}
@@ -66,5 +69,18 @@ void	check_player(t_game *game, int x, int y)
 		game->player.coin++;
 	game->map.env[y][x] = 'P';
 	aff_win(game);
-	printf("%zu\n", game->player.player_move);
+	print_num(game->player.player_move);
+	ft_putchar('\n');
+}
+
+void	print_num(int i)
+{
+	if (i > 9)
+		print_num(i / 10);
+	ft_putchar('0' + (i % 10));
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
 }
