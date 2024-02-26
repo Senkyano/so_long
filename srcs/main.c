@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 11:13:08 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/22 19:31:02 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 18:58:25 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	init_map_player(t_game *game)
 	game->map.access_exit = false;
 	game->map.cp_map = NULL;
 	game->map.n_coin = 0;
+	game->map.high = 0;
+	game->map.width = 0;
 	game->map.access_coin = 0;
 	game->player.coin = 0;
 	game->player.pos_x = -1;

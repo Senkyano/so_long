@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:17:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/25 02:07:38 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 18:55:24 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	map_valid(t_map *map, t_player *player)
 	if (!wall_around(map->env))
 		invalid_map(map, 1);
 	inside_wall(map, player);
+	if (map->exit == false || map->start != true || map->coin != true)
+		invalid_map(map, 5);
 	map->cp_map = copy_sent(map->env);
 	if (flood_field(map, player->pos_x, player->pos_y) == false)
 		invalid_map(map, 4);
@@ -45,32 +47,27 @@ static bool	in_data_map(char c)
 
 static void	inside_wall(t_map *map, t_player *player)
 {
-	size_t	x;
-	size_t	y;
-
-	y = -1;
-	while (map->env[++y])
+	map->high = -1;
+	while (map->env[++map->high])
 	{
-		x = -1;
-		while (map->env[y][++x])
+		map->width = -1;
+		while (map->env[map->high][++map->width])
 		{
-			if (map->env[y][x] == 'E' && map->exit == false)
+			if (map->env[map->high][map->width] == 'E' && map->exit == false)
 				map->exit = true;
-			else if (map->env[y][x] == 'P' && map->start == false)
-				init_poslayer(map, player, x, y);
-			else if (map->env[y][x] == 'E' || map->env[y][x] == 'P')
+			else if (map->env[map->high][map->width] == 'P' && map->start == false)
+				init_poslayer(map, player, map->width, map->high);
+			else if (map->env[map->high][map->width] == 'E' || map->env[map->high][map->width] == 'P')
 				invalid_map(map, 2);
-			if (map->env[y][x] == 'C')
+			if (map->env[map->high][map->width] == 'C')
 			{
 				map->coin = true;
 				map->n_coin++;
 			}
-			if (!in_data_map(map->env[y][x]))
+			if (!in_data_map(map->env[map->high][map->width]))
 				invalid_map(map, 3);
 		}
 	}
-	map->high = y;
-	map->width = x;
 }
 
 static bool	wall_around(char **sent)
@@ -111,5 +108,7 @@ static bool	same_length(char **sent)
 			return (false);
 		i++;
 	}
+	if (i == 1)
+		return (false);
 	return (true);
 }

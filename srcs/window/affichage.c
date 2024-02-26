@@ -6,11 +6,11 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 01:35:24 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/25 03:24:40 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 18:02:08 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lib_so_long.h"
+#include "lib_so_long.h"
 #include <stdio.h>
 
 void	aff_win(t_game *game)
@@ -40,4 +40,31 @@ void	aff_win(t_game *game)
 		}
 		y++;
 	}
+}
+
+void	check_player(t_game *game, int x, int y)
+{
+	if (game->map.env[y][x] == '1')
+	{
+		printf("%d = x, %d = y\n", x, y);
+		print_error("I can't move here,please choose an other direction\n");
+		return ;
+	}
+	if (game->player.under_exit == false)
+		game->map.env[game->player.pos_y][game->player.pos_x] = '0';
+	else if (game->player.under_exit == true)
+	{
+		game->player.under_exit = false;
+		game->map.env[game->player.pos_y][game->player.pos_x] = 'E';
+	}
+	game->player.pos_x = x;
+	game->player.pos_y = y;
+	game->player.player_move++;
+	if (game->map.env[y][x] == 'E' && game->player.under_exit != true)
+		game->player.under_exit = true;
+	else if (game->map.env[y][x] == 'C')
+		game->player.coin++;
+	game->map.env[y][x] = 'P';
+	aff_win(game);
+	printf("%zu\n", game->player.player_move);
 }

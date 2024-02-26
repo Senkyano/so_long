@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:12:03 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/25 03:23:45 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 17:56:58 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ typedef struct s_image
 typedef struct s_player
 {
 	size_t	coin;
+	bool	under_exit;
 	size_t	pos_x;
+	size_t	player_move;
 	size_t	pos_y;
 }	t_player;
 
@@ -74,5 +76,7 @@ void	init_poslayer(t_map *map, t_player *player, size_t x, size_t y);
 bool	flood_field(t_map *map, size_t x, size_t y);
 void	init_display(t_game *game);
 void	aff_win(t_game *game);
+// move 
+void	check_player(t_game *game, int x, int y);
 
 #endif

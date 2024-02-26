@@ -6,7 +6,7 @@
 #    By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/15 19:30:36 by rihoy             #+#    #+#              #
-#    Updated: 2024/02/25 01:47:35 by rihoy            ###   ########.fr        #
+#    Updated: 2024/02/26 14:57:46 by rihoy            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,7 +107,7 @@ $(NAME) : $(LIB_O) $(PARS_O) $(MLX) $(WIN_O)
 
 $(OBJS)/%.o : $(SRCS)/$(LIB)/%.c
 	@mkdir -p $(OBJS)
-	@$(CC) $(FLAGS) -I includes -c $< -o $@
+	@$(CC) $(FLAGS) -I includes -I $(MLX_DIR) -c $< -o $@
 	@echo "$(JAUNE)loading : $<"
 
 $(MLX) :
@@ -115,11 +115,11 @@ $(MLX) :
 
 $(OBJS)/%.o : $(SRCS)/$(PARS)/%.c
 	@echo "$(JAUNE)loading : $<"
-	@$(CC) $(FLAGS) -I includes -c $< -o $@
+	@$(CC) $(FLAGS) -I includes -I $(MLX_DIR) -c $< -o $@
 
 $(OBJS)/%.o : $(SRCS)/$(WIN)/%.c
 	@echo "$(JAUNE)loading : $<"
-	@$(CC) $(FLAGS) -I includes -c $< -o $@
+	@$(CC) $(FLAGS) -I includes -I $(MLX_DIR) -c $< -o $@
 # **************************************************************************** #
 # Regle / COMMAND
 

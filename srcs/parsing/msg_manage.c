@@ -6,15 +6,15 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:24:58 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/25 03:23:59 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 18:34:51 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lib_so_long.h"
+#include "lib_so_long.h"
 #include <stdlib.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
-#include "../../minilibx-linux/mlx.h"
+#include "mlx.h"
 #include <stdio.h>
 
 void	how_use(int n)
@@ -44,6 +44,11 @@ void	invalid_map(t_map *map, int n)
 		print_error("Invalid map : other caractere find than :-P-E-C-1-0-\n");
 	else if (n == 4)
 		print_error("Invalid map : collectible or exit can't be access\n");
+	else if (n == 5)
+		print_error("Invalid map : Position start, Exit or collectible\
+ doesn't exist\n");
+	else if (n == 6)
+		print_error("Invalid mlx\n");
 	free_map(map);
 	exit(ERROR);
 }
@@ -52,9 +57,12 @@ void	fail_display(t_game *game)
 {
 	if (game->texture.player != NULL)
 		mlx_destroy_image(game->mlx, game->texture.player);
-	// mlx_destroy_image(game->mlx, game->texture.ground);
-	// mlx_destroy_image(game->mlx, game->texture.wall);
-	// mlx_destroy_image(game->mlx, game->texture.coin);
+	if (game->texture.ground != NULL)
+		mlx_destroy_image(game->mlx, game->texture.ground);
+	if (game->texture.wall != NULL)
+		mlx_destroy_image(game->mlx, game->texture.wall);
+	if (game->texture.coin != NULL)
+		mlx_destroy_image(game->mlx, game->texture.coin);
 	mlx_destroy_window(game->mlx, game->window);
 	mlx_destroy_display(game->mlx);
 	free_map(&game->map);

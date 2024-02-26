@@ -6,13 +6,13 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:11:47 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/21 17:30:55 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/26 14:55:33 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
-#include "../../includes/lib_so_long.h"
-#include "../../includes/lib_utils.h"
+#include "get_next_line.h"
+#include "lib_so_long.h"
+#include "lib_utils.h"
 #include <stdio.h>
 
 char	*keep_to(char *str, char c);
