@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 16:35:15 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/26 18:46:10 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:43:03 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init_display(t_game *game)
 	}
 	init_texture(game);
 	aff_win(game);
+	mlx_hook(game->window, DestroyNotify, StructureNotifyMask, free_game, game);
 	mlx_hook(game->window, KeyRelease, KeyReleaseMask, handle_key, game);
 	mlx_loop(game->mlx);
 }
@@ -79,8 +80,11 @@ void	init_texture(t_game *game)
 	"srcs/texture/arbre.xpm", &i, &i);
 	game->texture.coin = mlx_xpm_file_to_image(game->mlx, \
 	"srcs/texture/circuit-coin.xpm", &i, &i);
+	game->texture.exit = mlx_xpm_file_to_image(game->mlx, \
+	"srcs/texture/boeuf_finish.xpm", &i, &i);
 	if (game->texture.player == NULL || game->texture.ground == NULL || \
-		game->texture.wall == NULL || game->texture.coin == NULL)
+		game->texture.wall == NULL || game->texture.coin == NULL || \
+		game->texture.exit == NULL)
 	{
 		clear_game(game);
 		free_map(&game->map);
@@ -98,6 +102,8 @@ void	clear_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->texture.wall);
 	if (game->texture.coin != NULL)
 		mlx_destroy_image(game->mlx, game->texture.coin);
+	if (game->texture.exit != NULL)
+		mlx_destroy_image(game->mlx, game->texture.exit);
 	if (game->window != NULL)
 		mlx_destroy_window(game->mlx, game->window);
 	if (game->mlx != NULL)

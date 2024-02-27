@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:12:03 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/26 17:56:58 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:42:34 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_image
 	void	*wall;
 	void	*player;
 	void	*coin;
+	void	*exit;
 }	t_image;
 
 typedef struct s_player
@@ -69,6 +70,7 @@ void	free_map(t_map *map);
 void	invalid_map(t_map *map, int n);
 void	fail_display(t_game *game);
 void	clear_game(t_game *game);
+int		free_game(t_game *game);
 // creation
 void	map_creator(t_map *map, char *file_map);
 void	map_valid(t_map *map, t_player *player);
