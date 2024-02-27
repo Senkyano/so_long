@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 16:17:34 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/26 18:55:24 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:51:46 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,11 @@ static void	inside_wall(t_map *map, t_player *player)
 		{
 			if (map->env[map->high][map->width] == 'E' && map->exit == false)
 				map->exit = true;
-			else if (map->env[map->high][map->width] == 'P' && map->start == false)
+			else if (map->env[map->high][map->width] == 'P' && \
+			map->start == false)
 				init_poslayer(map, player, map->width, map->high);
-			else if (map->env[map->high][map->width] == 'E' || map->env[map->high][map->width] == 'P')
+			else if (map->env[map->high][map->width] == 'E' || \
+			map->env[map->high][map->width] == 'P')
 				invalid_map(map, 2);
 			if (map->env[map->high][map->width] == 'C')
 			{

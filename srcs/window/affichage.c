@@ -6,7 +6,7 @@
 /*   By: rihoy <rihoy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 01:35:24 by rihoy             #+#    #+#             */
-/*   Updated: 2024/02/27 11:43:18 by rihoy            ###   ########.fr       */
+/*   Updated: 2024/02/27 11:52:21 by rihoy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@
 
 void	print_num(int i);
 void	ft_putchar(char c);
+
+static void	aff_win_loop(t_game *game, int x, int y)
+{
+	if (game->map.env[y][x] == 'C')
+		mlx_put_image_to_window(game->mlx, game->window, \
+		game->texture.coin, x * 50, y * 50);
+	if (game->map.env[y][x] == 'P')
+		mlx_put_image_to_window(game->mlx, game->window, \
+		game->texture.player, x * 50, y * 50);
+	if (game->map.env[y][x] == '1')
+		mlx_put_image_to_window(game->mlx, game->window, \
+		game->texture.wall, x * 50, y * 50);
+	if (game->map.env[y][x] == '0')
+		mlx_put_image_to_window(game->mlx, game->window, \
+		game->texture.ground, x * 50, y * 50);
+	if (game->map.env[y][x] == 'E')
+		mlx_put_image_to_window(game->mlx, game->window, \
+		game->texture.exit, x * 50, y * 50);
+}
 
 void	aff_win(t_game *game)
 {
@@ -27,23 +46,7 @@ void	aff_win(t_game *game)
 	{
 		x = -1;
 		while (game->map.env[y][++x])
-		{
-			if (game->map.env[y][x] == 'C')
-				mlx_put_image_to_window(game->mlx, game->window, \
-				game->texture.coin, x * 50, y * 50);
-			if (game->map.env[y][x] == 'P')
-				mlx_put_image_to_window(game->mlx, game->window, \
-				game->texture.player, x * 50, y * 50);
-			if (game->map.env[y][x] == '1')
-				mlx_put_image_to_window(game->mlx, game->window, \
-				game->texture.wall, x * 50, y * 50);
-			if (game->map.env[y][x] == '0')
-				mlx_put_image_to_window(game->mlx, game->window, \
-				game->texture.ground, x * 50, y * 50);
-			if (game->map.env[y][x] == 'E')
-				mlx_put_image_to_window(game->mlx, game->window, \
-				game->texture.exit, x * 50, y * 50);
-		}
+			aff_win_loop(game, x, y);
 	}
 }
 
@@ -71,19 +74,14 @@ void	check_player(t_game *game, int x, int y)
 	game->map.env[y][x] = 'P';
 	aff_win(game);
 	print_num(game->player.player_move);
-	ft_putchar('\n');
+	print_c('\n');
 }
 
 void	print_num(int i)
 {
 	if (i > 9)
 		print_num(i / 10);
-	ft_putchar('0' + (i % 10));
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
+	print_c('0' + (i % 10));
 }
 
 int	free_game(t_game *game)
